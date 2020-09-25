@@ -88,8 +88,8 @@ const commands = {
                 }
 
                 //Limit the image count
-                if (data.images.length > 30) {
-                    await msg.reply('Cannot display last scrape because it contains more than 30 images. Here is a link instead: ' + data.url);
+                if (data.images.length > process.env.PAGE_LIMIT) {
+                    await msg.reply('Cannot display last scrape because it contains more than '+process.env.PAGE_LIMIT+' images. Here is a link instead: ' + data.url);
                     return;
                 }
 
