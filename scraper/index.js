@@ -1,6 +1,7 @@
 module.exports = async function(url) {
     const scrapers = {
         nhentai: new (require("./nhentai.net"))(),
+        danbooru: new (require('./danbooru'))(),
         generic: new (require("./generic"))(),
     };
 
