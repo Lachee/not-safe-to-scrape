@@ -51,20 +51,23 @@ module.exports = class NHentaiScrapper extends Scraper {
             pageImages.push($(element).attr('src') || $(element).attr('srcset') || $(element).attr('data-src'));
         });
 
+        console.log('all images', pageImages);
         scrapeResult.title = $("meta[property='og:title']").attr("content");
         scrapeResult.description =  $("meta[property='og:description']").attr("content");
 
-        const levenshteined = levenshteinFilter(pageImages);
+        const levenshteined = levenshteinFilter(pageImages, 10);
         const images = levenshteined.filter(g => g.length > 3).flat();
+
         scrapeResult.images = images
                                 .map(url => url.startsWith('//') ? 'https:' + url : url)
                                 .filter(url => { 
                                     const s = url.split('?')[0];
-                                    return s.endsWith('.jpg') || s.endsWith('.jpeg')
+                                    console.log(s);
+                                    return s.endsWith('.jpg') || s.endsWith('.jpeg');
                                 });
 
-        console.log('generic', scrapeResult);
-        return scrapeResult; //scrapeResult;
+        console.log('actual images', scrapeResult.images);
+        return scrapeResult;
     }
 
     hasSomeParentTheClass($, element, className) {
