@@ -113,7 +113,7 @@ const commands = {
                 }
 
                 //Send a link to that message
-                if (first) await msg.reply("***JUMP TO START***\n" + first.url);
+                if (first) await msg.reply(`\n***JUMP TO START***\n${first.url}\n\n_source <${previousScrapedData.data.url}>_`);
             }
 		}),
     ]
