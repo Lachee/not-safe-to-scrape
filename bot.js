@@ -143,7 +143,7 @@ discord.on('message', async msg => {
         msg.suppressEmbeds(true);
         const scraped = previousScrapedData = await scrape(msg.content);
         const json = JSON.stringify(scraped, null, 2);
-        fs.writeFile(`./data/${scraped.scraper}-${scraped.data.id}.json`, json, (err) => {});
+        fs.writeFile(`./bin/${scraped.scraper}-${scraped.data.id}.json`, json, (err) => {});
 
         if (scraped.data.tags.includes('loli')) {
             await msg.reply(`**${scraped.scraper}***\n[ contains loli ]`);
