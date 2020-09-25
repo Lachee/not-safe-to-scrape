@@ -1,6 +1,7 @@
 module.exports = async function(url) {
     const scrapers = {
         nhentai: new (require("./nhentai.net"))(),
+        generic: new (require("./generic"))(),
     };
 
     //Find hte best scrapper

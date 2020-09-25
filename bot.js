@@ -141,7 +141,12 @@ discord.on('message', async msg => {
         console.log("Fetching Shit");
         
         msg.suppressEmbeds(true);
-        const scraped = previousScrapedData = await scrape(msg.content);
+		const scraped = previousScrapedData = await scrape(msg.content);
+		if (scraped.data.images.length < 2) {
+			await msg.reply("Failed to fetch enough images :/");
+			return;
+		}
+		
         const json = JSON.stringify(scraped, null, 2);
         fs.writeFile(`./bin/${scraped.scraper}-${scraped.data.id}.json`, json, (err) => {});
 

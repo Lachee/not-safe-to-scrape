@@ -1,7 +1,7 @@
 
 const scrape  = require('./scraper');
 
-const URL = "https://nhentai.net/g/327520/";
+const URL = process.argv[2] || "https://myadultanimes.com/overwatch-bdsmmaker-cherry-gig/";
 scrape(URL).then(data => {
   console.log("SCRAPED", data);
 });
