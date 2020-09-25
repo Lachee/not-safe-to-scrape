@@ -126,7 +126,7 @@ discord.on('ready', () => {
 //Clears embeds
 discord.on('messageUpdate', async (oldMsg, msg) => {
     if (msg.author.bot) return;
-    if (msg.channel.id != '758965194708877312') return;
+    if (msg.channel.id != process.env.CHANNEL_ID) return;
     await msg.suppressEmbeds(true);
 });
 
@@ -134,7 +134,7 @@ discord.on('messageUpdate', async (oldMsg, msg) => {
 discord.on('message', async msg => {
     if (!msg.channel.nsfw) return;
     if (msg.author.bot) return;
-    if (msg.channel.id != '758965194708877312') return;
+    if (msg.channel.id != process.env.CHANNEL_ID) return;
 
     //Its a link we should scrape!
     if (msg.content.trim().startsWith('http')) {
