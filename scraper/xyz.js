@@ -25,7 +25,7 @@ module.exports = class NHentaiScrapper extends Scraper {
         const page =  await response.text();
         const $ = cheerio.load(page);
 
-        scrapeResult.title = $('.entry-title').attr('content');
+        scrapeResult.title = $('.entry-title').text();
         $('figure a').each((i, elm) => { 
             scrapeResult.images.push($(elm).attr('href')); 
         });
