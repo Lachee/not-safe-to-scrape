@@ -31,7 +31,7 @@ module.exports = class Danbooru extends Scraper {
         scrapeResult.title = $("meta[property='og:title']").attr("content");
         scrapeResult.images = [];
         $('#image').each((i, elm) => { scrapeResult.images.push($(elm).attr('src')); });
-        $('.search-tag').each((i, elm) => { scrapeResult.tags.push($(elm).text()); });
+        $('.search-tag').each((i, elm) => { scrapeResult.tags.push($(elm).text().toLowerCase()); });
 
         return scrapeResult; //scrapeResult;
     }
