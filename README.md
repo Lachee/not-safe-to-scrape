@@ -26,4 +26,6 @@ The scraper does not download any content, it will just return hot links to the 
 |url		| string 	| original URL of the website. |
 |images		| string[] 	| list of image URLs to the best quality available of the image. |
 |thumbnail| string | the first image URL, or a suitable thumbnail to display |
+
+
 _?type denotes optional, type? denotes nullable_
