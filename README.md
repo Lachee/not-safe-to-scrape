@@ -16,6 +16,7 @@ The scraper does not download any content, it will just return hot links to the 
 | Name | Type | Description |
 |-----------|-----------|--------------------|
 |id			| string 	| unique identifier of the particular page for the scraped site. |
+|scraper| string | unique identifier of what scraper was used for the image |
 |type   | string  | type of content. Either `artwork`, `comic`, `video`  |
 |title		| string	| the name of the image/comic/article/page. |
 |description| string	| the description of the image/comic/article/page. |
