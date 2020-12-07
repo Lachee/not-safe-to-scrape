@@ -20,6 +20,7 @@ The scraper does not download any content, it will just return hot links to the 
 |type   | string  | type of content. Either `artwork`, `comic`, `video`  |
 |title		| string	| the name of the image/comic/article/page. |
 |description| string	| the description of the image/comic/article/page. |
+|artist| string | the name of the artist
 |tags		| string[]	| list of tags that are on the page. This maybe empty as some pages do not have tags. |
 |languages	| ?string[]	| list of languages that the comic is in. Optional. |
 |url		| string 	| original URL of the website. |
