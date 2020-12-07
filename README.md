@@ -4,7 +4,10 @@ NSTS is a web scraper that specializes in NSFW content. It is able to scrape tit
 ## Supported Sites
 * Danbooru
 * NHentai
-* XYZ
+* XYZ*
+* Pixiv
+* Rule34
+* SVSComics
 * _everything else!*_
 
 **Generic Support**
