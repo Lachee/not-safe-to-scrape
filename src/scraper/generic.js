@@ -23,13 +23,7 @@ const levenshteinFilter = (source, maximum = 5) => {
     return matches;
   }
 
-module.exports = class GenericScraper extends Scraper {
-      
-    validate(url) {
-        return true;
-    }
-
-    async scrape(url) {
+module.exports = async function(url) {
     
         // Get the metadata
         let scrapeResult = {
