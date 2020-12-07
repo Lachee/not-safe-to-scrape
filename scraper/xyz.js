@@ -3,7 +3,7 @@ const cheerio   = require('cheerio');
 const fetch     = require('node-fetch');
 const md5       = require('md5');
 
-module.exports = class NHentaiScrapper extends Scraper {
+module.exports = class XYZScraper extends Scraper {
     validate(url) {
         return url.includes('xyzcomics');
     }

@@ -23,7 +23,7 @@ const levenshteinFilter = (source, maximum = 5) => {
     return matches;
   }
 
-module.exports = class NHentaiScrapper extends Scraper {
+module.exports = class GenericScraper extends Scraper {
       
     validate(url) {
         return true;

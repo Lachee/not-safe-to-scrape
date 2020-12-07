@@ -2,7 +2,7 @@ const Scraper = require("./scraper");
 const scrapeIt  = require('scrape-it');
 const fetch     = require('node-fetch');
 
-module.exports = class NHentaiScrapper extends Scraper {
+module.exports = class NHentaiScraper extends Scraper {
     validate(url) {
         return url.includes('nhentai');
     }
