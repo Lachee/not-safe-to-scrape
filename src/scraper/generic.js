@@ -33,13 +33,15 @@ module.exports = class GenericScraper extends Scraper {
     
         // Get the metadata
         let scrapeResult = {
-            id: md5(url), 
-            title:          '',
-            description:    '',
+            id:             md5(url),
+            type:           'artwork',
+            title:          null,
+            description:    null,
+            artist:         null,
             tags:           [],
-            languages:      [],
             url:            url,
-            images:         []
+            images:         [],
+            thumbnail:      null,
         };
 
         const response = await fetch(url, { method: 'GET' });
@@ -67,6 +69,13 @@ module.exports = class GenericScraper extends Scraper {
                                 });
 
         console.log('actual images', scrapeResult.images);
+        
+        if (scrapeResult.images.length > 0) 
+            scrapeResult.thumbnail = scrapeResult.images[0];
+
+        if (scrapeResult.images.length > 1) 
+            scrapeResult.type = 'comic';
+
         return scrapeResult;
     }
 
