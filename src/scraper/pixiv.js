@@ -1,5 +1,7 @@
 const PixivApi = require('pixiv-api-client');
 
+//example: https://www.pixiv.net/en/artworks/86149949
+
 module.exports = async function(url) {
     const pixiv = new PixivApi();
 

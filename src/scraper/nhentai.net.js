@@ -1,5 +1,7 @@
 const scrapeIt  = require('scrape-it');
 
+//example: https://nhentai.net/g/333071/
+
 module.exports = async function(url) {
     const regex = /nhentai.net\/g\/([0-9]+)\//;
     const found = url.match(regex);
