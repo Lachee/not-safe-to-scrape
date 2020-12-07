@@ -3,6 +3,7 @@ module.exports = async function(url) {
         nhentai: new (require("./nhentai.net"))(),
         danbooru: new (require('./danbooru'))(),
         xyz: new (require("./xyz"))(),
+        pixiv: new (require("./pixiv"))(),
         generic: new (require("./generic"))(),
     };
 
@@ -12,8 +13,9 @@ module.exports = async function(url) {
 
             //Scrape with it
             console.log("Scraping with", name);
-            const data = await scrapers[name].scrape(url);
-            return { scraper: name, data: data };
+            let data = await scrapers[name].scrape(url);
+            data.scraper = name;
+            return data;
         }
     }
 

@@ -2,19 +2,27 @@
   "name": "not-safe-to-scrape",
   "version": "1.0.0",
   "description": "a web scraper for NSFW websites",
-  "main": "index.js",
+  "main": "./src/index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/index.js",
+    "debug": "nodemon src/index.js",
+    "dev": "nodemon src/index.js"
   },
   "author": "Anonymous Lachee",
   "license": "MIT",
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
     "fast-levenshtein": "^3.0.0",
+    "helmet": "^4.2.0",
+    "joi": "^17.3.0",
     "md5": "^2.3.0",
+    "morgan": "^1.10.0",
     "node-fetch": "^2.6.1",
+    "pixiv-api-client": "^0.24.0",
     "scrape-it": "^5.2.4"
   }
 }

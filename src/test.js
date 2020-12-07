@@ -1,9 +1,26 @@
 
+require('dotenv').config();
+
+/*
+const PixivApi = require('pixiv-api-client');
+const pixiv = new PixivApi();
+
+const word = 'ラブライブ';
+pixiv.login(process.env.PIXIV_NAME, process.env.PIXIV_PASSWORD).then(() => {
+  return pixiv.searchIllust(word).then(json => {
+	console.log(json);
+	return pixiv.requestUrl(json.next_url);
+  }).then(json => {
+	console.log(json); //next results
+  });
+});
+*/
+
 const scrape  = require('./scraper');
 
-const URL = process.argv[2] || "https://myadultanimes.com/overwatch-bdsmmaker-cherry-gig/";
-scrape(URL).then(data => {
-  console.log("SCRAPED", data);
+const url = "https://www.pixiv.net/en/artworks/86149949"; //"https://www.pixiv.net/en/artworks/86094006";
+scrape(url).then(data => {
+  console.log("Scraped the URL", url, data);
 });
 
 /*
