@@ -14,7 +14,7 @@ module.exports = async function(url) {
     const $ = cheerio.load(page);
 
     let images = [];    
-    $('#image img').each((i, elm) => { images.push($(elm).attr('src')); });
+    $('#image').each((i, elm) => { images.push($(elm).attr('src')); });
     
     let tags = [];    
     $('.tag a').each((i, elm) => { tags.push($(elm).text().toLowerCase()); });
