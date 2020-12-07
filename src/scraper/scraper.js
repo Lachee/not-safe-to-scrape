@@ -8,6 +8,7 @@ module.exports = class Scraper {
             xyz:        { rule: /xyzcomics/,    file: "./xyz"          },
             pixiv:      { rule: /pixiv/,        file: "./pixiv"        },
             svscomics:  { rule: /svscomics/,    file: "./svscomics.js" },
+            rule34:     { rule: /rule34\.xxx/,  file: "./rule34.js" },
             generic:    { rule: /.*/,           file: "./generic"      },
         }
     };
