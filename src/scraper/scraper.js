@@ -9,6 +9,7 @@ module.exports = class Scraper {
             pixiv:      { rule: /pixiv/,        file: "./pixiv"        },
             svscomics:  { rule: /svscomics/,    file: "./svscomics.js" },
             rule34:     { rule: /rule34\.xxx/,  file: "./rule34.js" },
+            image:      { rule: /\.((png)|(jpeg)|(jpg)|(gif)|(webm)|(mp4))/, file: "./image.js" },
             generic:    { rule: /.*/,           file: "./generic"      },
         }
     };

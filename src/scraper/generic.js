@@ -73,7 +73,7 @@ module.exports = async function(url) {
     return scrapeResult;
 }
 
-hasSomeParentTheClass($, element, className) {
+function hasSomeParentTheClass($, element, className) {
     if ($(element).hasClass(className)) return true;
     return element.parentNode && this.hasSomeParentTheClass($, element.parentNode, className);
 }
