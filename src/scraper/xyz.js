@@ -13,12 +13,14 @@ module.exports = class XYZScraper extends Scraper {
         // Get the metadata
         let scrapeResult = {
             id: md5(url), 
+            type: 'comic',
             title: url,
             description: '',
             tags: [],
             languages: [],
             url: url,
-            images: []
+            images: [],
+            special_access: 'outdated',
         };
 
         const response = await fetch(url, { method: 'GET' });
