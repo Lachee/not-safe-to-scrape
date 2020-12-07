@@ -5,8 +5,10 @@ NSTS is a web scraper that specializes in NSFW content. It is able to scrape tit
 * Danbooru
 * NHentai
 * XYZ
+* _everything else!*_
 
-## Generic Support
+**Generic Support**
+
 The scraper tries its best to scrape sites it does not have direct support for. The generic scraper will look for common patterns in the HTML, or large groups of images and return those.
 
 ## Response
