@@ -1,38 +1,53 @@
-const Scraper = require("./scraper");        
 const fetch     = require('node-fetch');
 const cheerio   = require('cheerio');
 
-module.exports = class Danbooru extends Scraper {
-    validate(url) {
-        return url.includes('danbooru');
-    }
+//example: https://danbooru.donmai.us/posts/4237731
 
-    async scrape(url) {
+module.exports = async function(url) {
     
-        const regex = /\/posts\/([0-9]+)\/?/;
-        const match = url.match(regex);
+    const regex = /\/posts\/([0-9]+)\/?/;
+    const match = url.match(regex);
 
-        // Get the metadata
-        let scrapeResult = {
-            id:             match[1], 
-            title:          match[1],
-            description:    '',
-            tags:           [],
-            languages:      [],
-            url:            url,
-            images:         []
-        };
+    const response = await fetch(url, { method: 'GET' });
+    const page =  await response.text();
+    const $ = cheerio.load(page);
 
+    let images = [];
+    $('#image').each((i, elm) => { images.push($(elm).attr('src')); });
+    
+    //TODO: Account for children
+    //images = [... new Set(images.filter(i => i != null))];
+
+    let tags = [];
+    $('.search-tag').each((i, elm) => { tags.push($(elm).text().toLowerCase()); });
+
+    let artist = [];
+    $('.artist-tag-list .search-tag').each((i, elm) => { artist.push($(elm).text().toLowerCase()) });
+    
+
+    //set the thumbnail
+    return {
+        id:             match[1],
+        type:           tags.indexOf('comic') >= 0 ? 'comic' : 'artwork',
+        title:          $("meta[property='og:title']").attr("content"),
+        description:    null,
+        artist:         artist,
+        tags:           [... new Set(tags.filter(t => artist.indexOf(t) == -1))],
+        url:            url,
+        images:         images,
+        thumbnail:      images[0],
+        pages:          images.length
+    };
+
+
+    async function getPostImage(post) {
+        
         const response = await fetch(url, { method: 'GET' });
         const page =  await response.text();
         const $ = cheerio.load(page);
 
-
-        scrapeResult.title = $("meta[property='og:title']").attr("content");
-        scrapeResult.images = [];
-        $('#image').each((i, elm) => { scrapeResult.images.push($(elm).attr('src')); });
-        $('.search-tag').each((i, elm) => { scrapeResult.tags.push($(elm).text().toLowerCase()); });
-
-        return scrapeResult; //scrapeResult;
+        let images = [];
+        $('#image').each((i, elm) => { images.push($(elm).attr('src')); });
+        
     }
 }

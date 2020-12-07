@@ -48,30 +48,4 @@ module.exports = async function(url) {
         thumbnail:      data.cover,
         pages:          data.pages
     };
-
-    // Scan the pages
-    let page = 0;
-    let totalPages = 1;
-    do {
-        const { data } = await scrapeIt(base + (page + 1).toString(), {
-            pages: { 
-                selector: ".page-number span.num-pages", 
-                eq: 0, 
-                convert: parseInt
-            },
-            image: {
-                selector: "#image-container > a > img",
-                attr: "src"
-            }
-        });
-
-        console.log('nhentai page: ', data);
-        scrapeResult.images.push(data.image);
-        totalPages = data.pages;
-        page += 1;
-
-    }while(page < totalPages);
-
-    // Finally return the data
-    return scrapeResult;
 }
