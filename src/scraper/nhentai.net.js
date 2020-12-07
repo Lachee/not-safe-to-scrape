@@ -26,12 +26,14 @@ module.exports = async function(url) {
         },
     });
 
-
+    //Find the format
+    const format = data.cover.substring(data.cover.lastIndexOf('.')+1);
+    
     //Load up the images
     let images = [];
     const galleryID = data.cover.match(/\/galleries\/([0-9]+)\//)[1];
     for(let page = 1; page < data.pages+1; page++) {
-        images.push(`https://i.nhentai.net/galleries/${galleryID}/${page}.jpg`);
+        images.push(`https://i.nhentai.net/galleries/${galleryID}/${page}.${format}`);
     }
 
     //set the thumbnail
