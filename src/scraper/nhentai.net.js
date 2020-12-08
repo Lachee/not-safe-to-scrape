@@ -42,7 +42,7 @@ module.exports = async function(url) {
         type:           'comic',
         title:          data.title,
         description:    null,
-        artist:         data.artist[0] ?? null,
+        artist:         data.artist,
         tags:           [... new Set(data.tags.map(t => t.toLowerCase()))],
         languages:      [... new Set(data.languages.map(t => t.toLowerCase()))],
         url:            base,
