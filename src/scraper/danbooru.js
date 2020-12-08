@@ -33,7 +33,7 @@ module.exports = async function(url) {
         description:    null,
         artist:         artist,
         tags:           [... new Set(tags.filter(t => artist.indexOf(t) == -1))],
-        url:            url,
+        url:            `https://danbooru.donmai.us/posts/${match[1]}`,
         images:         images,
         thumbnail:      images[0],
         pages:          images.length
