@@ -14,7 +14,7 @@ module.exports = async function(url) {
     $('.preview-row a').each((i, elm) => { images.push($(elm).attr('href')); });
     
     let tags = [];    
-    $('.tagzfull a').each((i, elm) => { tags.push($(elm).attr('href').toLowerCase()); });
+    $('.tagzfull a').each((i, elm) => { tags.push($(elm).text().toLowerCase()); });
     
     return {
         id:             md5(url),
