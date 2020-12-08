@@ -19,7 +19,7 @@ module.exports = async function(url) {
         title:  details.illust.title,
         description: details.illust.caption,
         artist: details.illust.user.account,
-        tags: [... new Set(details.illust.tags.map(t => (t.translated_name ?? t.name).toLowerCase()))],
+        tags: [... new Set(details.illust.tags.map(t => (t.translated_name || t.name).toLowerCase()))],
         url: url,
         images: details.illust.meta_pages.map(p => p.image_urls.original),
         thumbnail: details.illust.image_urls.medium,
