@@ -7,6 +7,7 @@ module.exports = class Scraper {
             danbooru:   { rule: /danbooru/,     file: "./danbooru"     },
             xyz:        { rule: /xyzcomics/,    file: "./xyz"          },
             pixiv:      { rule: /pixiv/,        file: "./pixiv"        },
+            deviantart: { rule: /deviantart/,   file: "./deviant"      },
             //svscomics:  { rule: /svscomics/,    file: "./svscomics.js" },
             rule34:     { rule: /rule34\.xxx/,  file: "./rule34.js" },
             image:      { rule: /\.((png)|(jpeg)|(jpg)|(gif)|(webm)|(mp4))/, file: "./image.js" },
