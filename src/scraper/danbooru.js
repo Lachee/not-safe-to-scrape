@@ -24,12 +24,14 @@ module.exports = async function(url) {
     let artist = [];
     $('.artist-tag-list .search-tag').each((i, elm) => { artist.push($(elm).text().toLowerCase()) });
     
+    let title = $("meta[property='og:title']").attr("content");
+    title = title.substr(0, title.lastIndexOf('|'));
 
     //set the thumbnail
     return {
         id:             match[1],
         type:           tags.indexOf('comic') >= 0 ? 'comic' : 'artwork',
-        title:          $("meta[property='og:title']").attr("content"),
+        title:          title,
         description:    null,
         artist:         artist,
         tags:           [... new Set(tags.filter(t => artist.indexOf(t) == -1))],
