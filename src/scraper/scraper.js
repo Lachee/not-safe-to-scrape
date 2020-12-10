@@ -5,6 +5,8 @@ module.exports = class Scraper {
         return {
             nhentai:    { rule: /nhentai/,      file: "./nhentai.net"  },
             danbooru:   { rule: /danbooru/,     file: "./danbooru"     },
+            safebooru:  { rule: /safebooru/,    file: "./safebooru"    },
+            gelbooru:   { rule: /gelbooru/,    file: "./safebooru"    },
             xyz:        { rule: /xyzcomics/,    file: "./xyz"          },
             pixiv:      { rule: /pixiv/,        file: "./pixiv"        },
             deviantart: { rule: /deviantart/,   file: "./deviant"      },
