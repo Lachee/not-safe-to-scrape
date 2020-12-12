@@ -5,10 +5,11 @@ const cheerio   = require('cheerio');
 
 module.exports = async function(url) {
     
-    const regex = /deviantart\.com\/([a-zA-Z0-9-]*)\//;
+    url = url.trim();
+    const regex = /deviantart\.com\/([a-zA-Z0-9-]*)\/.*/;
     const matches = url.match(regex);
     const username = matches[1];
-    
+
     //const response = await fetch(url, { method: 'GET' });
     //const page =  await response.text();
     //const $ = cheerio.load(page);
@@ -25,11 +26,11 @@ module.exports = async function(url) {
     while (metadata == null && page < 15) {
         console.log('looking at', page);
         const offset = (page++) * pageLimit;
-        const response = await fetch(`https://www.deviantart.com/api/v1/oauth2/gallery/all?username=${username}&calculate_size=false&mature_content=true&access_token=${oauthToken['access_token']}&offset=${offset}`);
+        const response = await fetch(`https://www.deviantart.com/api/v1/oauth2/gallery/all?username=${username}&calculate_size=false&mature_content=true&access_token=${oauthToken['access_token']}&offset=${offset}&limit=${pageLimit}`);
         const listing = await response.json();
         
         //Look for the record that has the correct url
-        const allResults = listing.results.filter(r => r.url == url)
+        const allResults = listing.results.filter(r => r.url.endsWith(matches[0]));
         if (allResults.length > 0) {
             //metadata = allResults[0];
             const uuid = allResults[0].deviationid;
