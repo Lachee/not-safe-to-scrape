@@ -9,6 +9,8 @@ module.exports = async function(url) {
     const page =  await response.text();
     const $ = cheerio.load(page);
 
+    console.log('Recieved ', page);
+
     const contentUrl = $('meta[property="da:appurl"]').attr('content');
     const uuid = contentUrl.substr(contentUrl.lastIndexOf('/')+1);
     //console.log('uuid', uuid);
