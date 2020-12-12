@@ -35,7 +35,10 @@ module.exports = async function(url) {
             const uuid = allResults[0].deviationid;
             const metadataResponse = await fetch(`https://www.deviantart.com/api/v1/oauth2/deviation/metadata?access_token=${oauthToken['access_token']}&deviationids%5B%5D=${uuid}&mature_content=true`, { method: 'GET' });
             metadata = (await metadataResponse.json()).metadata[0];
-            metadata.content = allResults[0].content;
+
+            //Copy over some important shit
+            metadata.content    = allResults[0].content;
+            metadata.url        = allResults[0].url;
             break;
         }
         
