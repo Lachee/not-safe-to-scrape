@@ -12,14 +12,15 @@ module.exports = async function(url) {
 
     await pixiv.login(process.env.PIXIV_NAME, process.env.PIXIV_PASSWORD);
     const details = await pixiv.illustDetail(id);
+    const tags = details.illust.tags.map(t => (t.translated_name || t.name).toLowerCase());
     
     return {
         id:             id,
-        type:           type == 'artwork' ? 'artwork' : 'comic',
+        type:           type == 'artworks' && !tags.contains('comic') && !tags.contains('manga')  ? 'artwork' : 'comic',
         title:          details.illust.title,
         description:    details.illust.caption,
         artist:         [details.illust.user.account],
-        tags:           [... new Set(details.illust.tags.map(t => (t.translated_name || t.name).toLowerCase()))],
+        tags:           [... new Set(tags)],
         url:            url,
         images:         details.illust.meta_pages.map(p => p.image_urls.original),
         cover:          details.illust.image_urls.medium,
