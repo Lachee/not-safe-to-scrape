@@ -43,7 +43,7 @@ module.exports = async function(url) {
         tags:           [... new Set(tags.filter(t => artist.indexOf(t) == -1))],
         url:            `https://${domain}/index.php?page=post&s=view&id=${match[1]}`,
         images:         images,
-        thumbnail:      thumbnail,
+        cover:          thumbnail,
         pages:          images.length
     };
 }

@@ -37,7 +37,7 @@ module.exports = async function(url) {
         tags:           [... new Set(tags.filter(t => artist.indexOf(t) == -1))],
         url:            `https://danbooru.donmai.us/posts/${match[1]}`,
         images:         images,
-        thumbnail:      images[0],
+        cover:          null,
         pages:          images.length
     };
 

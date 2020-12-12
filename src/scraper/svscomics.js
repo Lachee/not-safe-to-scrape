@@ -25,6 +25,6 @@ module.exports = async function(url) {
         tags:           [... new Set(tags)],
         url:            url,
         images:         [... new Set(images)],
-        thumbnail:      images[0],
+        cover:          images[0],
     }
 }

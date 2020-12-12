@@ -31,6 +31,6 @@ module.exports = async function(url) {
         tags:           [... new Set(tags.filter(t => artist.indexOf(t) == -1))],
         url:            url,
         images:         [... new Set(images)],
-        thumbnail:      images[0],
+        cover:          null,
     }
 }

@@ -14,15 +14,15 @@ module.exports = async function(url) {
     const details = await pixiv.illustDetail(id);
     
     return {
-        id:     id,
-        type:   type == 'artwork' ? 'artwork' : 'comic',
-        title:  details.illust.title,
-        description: details.illust.caption,
-        artist: [details.illust.user.account],
-        tags: [... new Set(details.illust.tags.map(t => (t.translated_name || t.name).toLowerCase()))],
-        url: url,
-        images: details.illust.meta_pages.map(p => p.image_urls.original),
-        thumbnail: details.illust.image_urls.medium,
+        id:             id,
+        type:           type == 'artwork' ? 'artwork' : 'comic',
+        title:          details.illust.title,
+        description:    details.illust.caption,
+        artist:         [details.illust.user.account],
+        tags:           [... new Set(details.illust.tags.map(t => (t.translated_name || t.name).toLowerCase()))],
+        url:            url,
+        images:         details.illust.meta_pages.map(p => p.image_urls.original),
+        cover:          details.illust.image_urls.medium,
         special_access: 'referer'
     }
 }

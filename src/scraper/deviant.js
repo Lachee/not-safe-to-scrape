@@ -34,7 +34,7 @@ module.exports = async function(url) {
         tags:           [... new Set(tags)],
         url:            deviant.url,
         images:         [ deviant.content.src ],
-        thumbnail:      deviant.content.src,
+        cover:          null,
         pages:          1
     };
 

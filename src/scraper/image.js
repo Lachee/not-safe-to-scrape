@@ -13,6 +13,6 @@ module.exports = async function(url) {
         tags:           [ ],
         url:            url,
         images:         [ url ],
-        thumbnail:      url,
+        cover:          null,
     };
 }

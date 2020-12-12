@@ -35,7 +35,7 @@ module.exports = async function(url) {
         tags:           [],
         url:            url,
         images:         [],
-        thumbnail:      null,
+        cover:          null,
     };
 
     const response = await fetch(url, { method: 'GET' });
@@ -64,11 +64,11 @@ module.exports = async function(url) {
 
     console.log('actual images', scrapeResult.images);
     
-    if (scrapeResult.images.length > 0) 
-        scrapeResult.thumbnail = scrapeResult.images[0];
 
-    if (scrapeResult.images.length > 1) 
+    if (scrapeResult.images.length > 1) { 
         scrapeResult.type = 'comic';
+        scrapeResult.cover= scrapeResult.images[0];
+      }
 
     return scrapeResult;
 }

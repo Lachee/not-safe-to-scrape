@@ -47,7 +47,7 @@ module.exports = async function(url) {
         languages:      [... new Set(data.languages.map(t => t.toLowerCase()))],
         url:            base,
         images:         images,
-        thumbnail:      data.cover,
+        cover:          data.cover,
         pages:          data.pages
     };
 }
