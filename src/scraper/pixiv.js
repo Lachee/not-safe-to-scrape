@@ -18,6 +18,10 @@ module.exports = async function(url) {
     if (urlType != 'artworks' || tags.indexOf('comic') >= 0 || tags.indexOf('manga') >= 0)
         type = 'comic';
 
+    let images = details.illust.meta_pages.map(p => p.image_urls.original);
+    if (details.illust.meta_pages.length == 0) 
+        images = [ details.illust.meta_single_page.original_image_url ];
+        
     return {
         id:             id,
         type:           type,
@@ -26,7 +30,7 @@ module.exports = async function(url) {
         artist:         [details.illust.user.account],
         tags:           [... new Set(tags)],
         url:            url,
-        images:         details.illust.meta_pages.map(p => p.image_urls.original),
+        images:         images,
         cover:          details.illust.image_urls.medium,
         special_access: 'referer'
     }
