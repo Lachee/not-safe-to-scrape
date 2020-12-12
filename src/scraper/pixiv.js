@@ -7,16 +7,20 @@ module.exports = async function(url) {
 
     const regex = /pixiv.net\/\w*\/(\w*)\/(\d*)/;
     const matches = url.match(regex);
-    const type = matches[1];
+    const urlType = matches[1];
     const id = matches[2];
 
     await pixiv.login(process.env.PIXIV_NAME, process.env.PIXIV_PASSWORD);
     const details = await pixiv.illustDetail(id);
     const tags = details.illust.tags.map(t => (t.translated_name || t.name).toLowerCase());
     
+    let type = 'artwork';
+    if (urlType != 'artworks' || tags.indexOf('comic') >= 0 || tags.indexOf('manga') >= 0)
+        type = 'comic';
+
     return {
         id:             id,
-        type:           type == 'artworks' && !tags.contains('comic') && !tags.contains('manga')  ? 'artwork' : 'comic',
+        type:           type,
         title:          details.illust.title,
         description:    details.illust.caption,
         artist:         [details.illust.user.account],
