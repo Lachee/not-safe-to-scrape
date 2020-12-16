@@ -16,11 +16,11 @@ pixiv.login(process.env.PIXIV_NAME, process.env.PIXIV_PASSWORD).then(() => {
 });
 */
 
-const scrape  = require('./scraper');
+const Scraper        = require('./scraper/scraper');
 
-const url = "https://www.pixiv.net/en/artworks/86149949"; //"https://www.pixiv.net/en/artworks/86094006";
-scrape(url).then(data => {
-  console.log("Scraped the URL", url, data);
+const url = "https://twitter.com/BNn05aOL9rm9SYs/status/1339104817516429313"; //"https://www.pixiv.net/en/artworks/86094006";
+Scraper.scrapeURL(url).then(data => {
+  console.log(data);
 });
 
 /*

@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node src/index.js",
     "debug": "nodemon src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "test": "nodemon src/test.js"
   },
   "author": "Anonymous Lachee",
   "license": "MIT",
@@ -23,6 +24,7 @@
     "morgan": "^1.10.0",
     "node-fetch": "^2.6.1",
     "pixiv-api-client": "^0.24.0",
+    "puppeteer": "^5.5.0",
     "scrape-it": "^5.2.4"
   }
 }
