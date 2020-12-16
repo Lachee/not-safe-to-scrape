@@ -13,6 +13,7 @@ module.exports = class Scraper {
             deviantart: { rule: /deviantart/,   file: "./deviant"       },
             //svscomics:  { rule: /svscomics/,    file: "./svscomics.js" },
             rule34:     { rule: /rule34\.xxx/,  file: "./rule34.js"     },
+            discord:      { rule: /discordapp.*((png)|(jpe?g))/, file: "./discord.js" },
             image:      { rule: /\.((png)|(jpeg)|(jpg)|(gif)|(webm))/, file: "./image.js" },
             generic:    { rule: /.*/,           file: "./generic"       },
         }

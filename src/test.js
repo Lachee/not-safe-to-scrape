@@ -18,7 +18,7 @@ pixiv.login(process.env.PIXIV_NAME, process.env.PIXIV_PASSWORD).then(() => {
 
 const Scraper        = require('./scraper/scraper');
 
-const url = "https://twitter.com/BNn05aOL9rm9SYs/status/1339104817516429313"; //"https://www.pixiv.net/en/artworks/86094006";
+const url = "https://media.discordapp.net/attachments/561472450970386437/788331140150591538/146v22tw57561.png?width=576&height=801"; //"https://www.pixiv.net/en/artworks/86094006";
 Scraper.scrapeURL(url).then(data => {
   console.log(data);
 });
