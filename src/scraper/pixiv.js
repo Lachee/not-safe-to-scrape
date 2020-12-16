@@ -5,7 +5,7 @@ const PixivApi = require('pixiv-api-client');
 module.exports = async function(url) {
     const pixiv = new PixivApi();
 
-    const regex = /pixiv.net\/\w*\/(\w*)\/(\d*)/;
+    const regex = /pixiv.net\/?\w*\/(\w*)\/(\d*)/;
     const matches = url.match(regex);
     const urlType = matches[1];
     const id = matches[2];
@@ -22,6 +22,8 @@ module.exports = async function(url) {
     if (details.illust.meta_pages.length == 0) 
         images = [ details.illust.meta_single_page.original_image_url ];
         
+    console.log(tags);
+
     return {
         id:             id,
         type:           type,
