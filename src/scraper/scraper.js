@@ -10,7 +10,7 @@ module.exports = class Scraper {
             gelbooru:   { rule: /gelbooru/,     file: "./safebooru"     },
             xyz:        { rule: /xyzcomics/,    file: "./xyz"           },
             pixiv:      { rule: /pixiv/,        file: "./pixiv"         },
-            twitter:    { rule: /twitter/,      file: "./twitter"       },
+            twitter:    { rule: /(tw)|nitter/,      file: "./twitter"       },
             deviantart: { rule: /deviantart/,   file: "./deviant"       },
             //svscomics:  { rule: /svscomics/,    file: "./svscomics.js" },
             rule34:     { rule: /rule34\.xxx/,  file: "./rule34.js"     },

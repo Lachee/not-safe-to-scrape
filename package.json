@@ -24,7 +24,9 @@
     "morgan": "^1.10.0",
     "node-fetch": "^2.6.1",
     "pixiv-api-client": "^0.24.0",
-    "puppeteer": "^5.5.0",
     "scrape-it": "^5.2.4"
+  },
+  "devDependencies": {
+    "puppeteer": "^5.5.0"
   }
 }

@@ -1,10 +1,66 @@
 const fetch     = require('node-fetch');
-const puppeteer = require('puppeteer');
+const cheerio   = require('cheerio');
 const md5       = require('md5');
 
-//example: https://danbooru.donmai.us/posts/4237731
+const preferNitterURL = process.env.PREFER_NITTER ?? false;
 
-module.exports = async function(url) {
+//example: https://twitter.com/BNn05aOL9rm9SYs/status/1339104817516429313
+
+module.exports = nitterScrape;
+async function nitterScrape(url) {
+    const regex     = /(tw)|nitter\.(com)|(net)\/(\w*)\/status\/(\w*)/;
+    const matches   = url.match(regex);
+    let title       = matches[5];
+    let artist      = matches[4];
+
+    const nitterURL     = `https://nitter.net/${matches[4]}/status/${matches[5]}`;
+    const twitterURL    = `https://twitter.com/${matches[4]}/status/${matches[5]}`;
+    
+    const response = await fetch(nitterURL, { method: 'GET' });
+    const page =  await response.text();
+    const $ = cheerio.load(page);
+    
+    let images = [];
+    let tags = [];
+
+    //Sort out the images
+    $('.main-tweet .attachment.image img').each((i, elm) => { 
+        let relative = $(elm).attr('src');
+        let index = relative.lastIndexOf('%3F');
+        relative = relative.substr(0, index);
+        console.log('img', relative);
+        images.push('https://nitter.net' + relative);
+    });
+
+    //Sort out the tags
+    $('.main-tweet .tweet-content').each((i, elm) => {
+        title   = $(elm).clone().children().remove().end().text();
+        tags    = [];
+        $(elm).find('a').each((i, telm) => {
+            if ($(telm).text().startsWith('#'))
+                tags.push($(telm).text().substr(1).trim().toLowerCase());
+        });
+    });
+
+
+    //Finally return
+    return {
+        id:             md5(twitterURL),
+        type:           'artwork',
+        title:          title.trim(),
+        description:    null,
+        artist:         [ artist ],
+        tags:           [... new Set(tags)],
+        url:            preferNitterURL ? nitterURL : twitterURL,
+        images:         images,
+        cover:          null,
+        pages:          1
+    };
+}
+
+/*
+const puppeteer = require('puppeteer');
+async function twitterScrape(url) {
     let index = 0;
     const regex     = /twitter\.com\/(\w*)\/status\/(\w*)/;
     const matches = url.match(regex);
@@ -71,3 +127,4 @@ module.exports = async function(url) {
         pages:          1
     };
 }
+*/
