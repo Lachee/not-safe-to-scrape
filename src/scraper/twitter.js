@@ -8,13 +8,14 @@ const preferNitterURL = process.env.PREFER_NITTER ?? false;
 
 module.exports = nitterScrape;
 async function nitterScrape(url) {
-    const regex     = /(tw)|nitter\.(com)|(net)\/(\w*)\/status\/(\w*)/;
+    const regex     = /((tw)|n)itter\.((com)|(net))\/(\w*)\/status\/(\w*)/;
     const matches   = url.match(regex);
-    let title       = matches[5];
-    let artist      = matches[4];
+    let title       = matches[7];
+    let artist      = matches[6];
 
-    const nitterURL     = `https://nitter.net/${matches[4]}/status/${matches[5]}`;
-    const twitterURL    = `https://twitter.com/${matches[4]}/status/${matches[5]}`;
+    console.log(matches);
+    const nitterURL     = `https://nitter.net/${artist}/status/${title}`;
+    const twitterURL    = `https://twitter.com/${artist}/status/${title}`;
     
     const response = await fetch(nitterURL, { method: 'GET' });
     const page =  await response.text();
