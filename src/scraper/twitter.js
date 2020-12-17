@@ -2,7 +2,7 @@ const fetch     = require('node-fetch');
 const cheerio   = require('cheerio');
 const md5       = require('md5');
 
-const preferNitterURL = process.env.PREFER_NITTER ?? false;
+const preferNitterURL = process.env.PREFER_NITTER || false;
 
 //example: https://twitter.com/BNn05aOL9rm9SYs/status/1339104817516429313
 
