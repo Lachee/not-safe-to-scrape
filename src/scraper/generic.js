@@ -5,6 +5,8 @@ const cheerio   = require('cheerio');
 const md5       = require('md5');
 const levenshtein = require('fast-levenshtein'); 
 
+//https://aster-effect.com/2020/02/18/lupusregina-and-shalltears-bondage/
+
 const levenshteinFilter = (source, maximum = 5) => {
     let _source, matches, x, y;
     _source = source.slice();
@@ -31,7 +33,7 @@ module.exports = async function(url) {
         type:           'artwork',
         title:          null,
         description:    null,
-        artist:         null,
+        artist:         [],
         tags:           [],
         url:            url,
         images:         [],
@@ -51,24 +53,27 @@ module.exports = async function(url) {
     scrapeResult.title = $("meta[property='og:title']").attr("content");
     scrapeResult.description =  $("meta[property='og:description']").attr("content");
 
+    //Find appropriate images
     const levenshteined = levenshteinFilter(pageImages, 10);
     const images = levenshteined.filter(g => g.length > 3).flat();
-
     scrapeResult.images = images
                             .map(url => url.startsWith('//') ? 'https:' + url : url)
                             .filter(url => { 
                                 const s = url.split('?')[0];
                                 console.log(s);
-                                return s.endsWith('.jpg') || s.endsWith('.jpeg');
+                                return s.endsWith('.jpg') || s.endsWith('.jpeg') || s.endsWith('.png') || s.endsWith('.gif');
                             });
-
-    console.log('actual images', scrapeResult.images);
-    
 
     if (scrapeResult.images.length > 1) { 
         scrapeResult.type = 'comic';
         scrapeResult.cover= scrapeResult.images[0];
       }
+
+
+    //Find appropriate tags
+    $('.tags-links a').each((i, element) => {
+        scrapeResult.tags.push($(element).text());
+    });
 
     return scrapeResult;
 }
