@@ -17,7 +17,7 @@ async function nitterScrape(url) {
     
     console.log(post.preview.images);
     const images = post.preview.images.map(i => i.source.url.replace(/&amp;/g, "&"));
-    const cover = post.preview.images[0].resolutions[0].url.replace(/&amp;/g, "&");
+    const cover = post.preview.images[0].resolutions[post.preview.images[0].resolutions.length - 1].url.replace(/&amp;/g, "&");
 
     //Finally return
     return {
