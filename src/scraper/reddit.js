@@ -17,7 +17,7 @@ async function nitterScrape(url) {
     
     console.log(post.preview.images);
     const images = post.preview.images.map(i => i.source.url.replace(/&amp;/g, "&"));
-    const cover = post.preview.images[0].resolutions[post.preview.images[0].resolutions.length - 1].url.replace(/&amp;/g, "&");
+    //const cover = post.preview.images[0].resolutions[post.preview.images[0].resolutions.length - 1].url.replace(/&amp;/g, "&");
 
     //Finally return
     return {
@@ -29,7 +29,7 @@ async function nitterScrape(url) {
         tags:           [ ],
         url:            `https://www.reddit.com${post.permalink}`,
         images:         images,
-        cover:          cover,
+        cover:          null,
         pages:          1
     };
 }
