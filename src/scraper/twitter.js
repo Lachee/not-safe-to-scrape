@@ -16,20 +16,21 @@ async function nitterScrape(url) {
     console.log(matches); 
 
     const twitterURL    = `https://twitter.com/${artist}/status/${title}`;
-    const nitterURLS = [
-        `https://nitter.net/${artist}/status/${title}`, 
-        `https://nitter.cc/${artist}/status/${title}`,
-        `https://nitter.dark.fail/${artist}/status/${title}`,
-        `https://nitter.dark.fail/${artist}/status/${title}`,
-        `https://nitter.eu/${artist}/status/${title}`,
-        `https://nitter.himiko.cloud/${artist}/status/${title}`
-    ]
+    const nitterInstances = [
+        `https://nitter.net`, 
+        `https://nitter.dark.fail`,
+        `https://nitter.cc`,
+        `https://nitter.eu`,
+        `https://nitter.himiko.cloud`
+    ];
     
     /** Scan for a valid nitter URL */
-    let nitterURL       = twitterURL;
+    let nitterURL       = '';
+    let nitterInstance  = '';
     let response = null;
-    for(let ni in nitterURLS) {
-        nitterURL = nitterURLS[ni];
+    for(let ni in nitterInstances) {
+        nitterInstance  = nitterInstances[ni];
+        nitterURL       = `${nitterInstance}/${artist}/status/${title}`;
         console.log('Nitter Attempt', ni, nitterURL);
 
         response = await fetch(nitterURL, { method: 'GET' });
@@ -56,7 +57,7 @@ async function nitterScrape(url) {
         let index = relative.lastIndexOf('%3F');
         relative = relative.substr(0, index);
         console.log('img', relative);
-        images.push('https://nitter.net' + relative);
+        images.push(nitterInstance + relative);
     });
 
     //Sort out the tags
