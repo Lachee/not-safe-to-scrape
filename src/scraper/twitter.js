@@ -13,11 +13,37 @@ async function nitterScrape(url) {
     let title       = matches[7];
     let artist      = matches[6];
 
-    console.log(matches);
-    const nitterURL     = `https://nitter.net/${artist}/status/${title}`;
+    console.log(matches); 
+
     const twitterURL    = `https://twitter.com/${artist}/status/${title}`;
+    const nitterURLS = [
+        `https://nitter.net/${artist}/status/${title}`, 
+        `https://nitter.cc/${artist}/status/${title}`,
+        `https://nitter.dark.fail/${artist}/status/${title}`,
+        `https://nitter.dark.fail/${artist}/status/${title}`,
+        `https://nitter.eu/${artist}/status/${title}`,
+        `https://nitter.himiko.cloud/${artist}/status/${title}`
+    ]
     
-    const response = await fetch(nitterURL, { method: 'GET' });
+    /** Scan for a valid nitter URL */
+    let nitterURL       = twitterURL;
+    let response = null;
+    for(let ni in nitterURLS) {
+        nitterURL = nitterURLS[ni];
+        console.log('Nitter Attempt', ni, nitterURL);
+
+        response = await fetch(nitterURL, { method: 'GET' });
+        if (response.status == 200) break;
+    }
+    
+    /** Failed! */
+    if (response.status != 200) {
+        console.log('Exhausted all nitter urls. Failed!');
+        return false;
+    } else {
+        console.log('Found a nitter URL', nitterURL);
+    }
+
     const page =  await response.text();
     const $ = cheerio.load(page);
     
