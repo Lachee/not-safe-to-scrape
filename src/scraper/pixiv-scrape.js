@@ -22,7 +22,7 @@ module.exports = async function(url) {
     //Store images
     const images = [];
     for(let i = 0; i < data.Pages; i++) {
-        images.push(`${process.env.BASE_URL}/api/scrape/prixiv/${id}_p${i}.png`);
+        images.push(`${process.env.BASE_URL}/api/scrape/pixiv/${id}_p${i}.png`);
     }
 
     return {
