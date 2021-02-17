@@ -23,6 +23,7 @@ module.exports = async function(url) {
     //Store images
     const images = [];
     glob(`${process.env.BASE_URL}/api/scrape/pixiv/${id}_*.*`, options, function (er, files) {
+        console.log('files', files);
         images.push(...files);
     });
 
