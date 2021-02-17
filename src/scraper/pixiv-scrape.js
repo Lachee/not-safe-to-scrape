@@ -3,6 +3,7 @@
  */
 const fs = require('fs');
 const child_process = require('child_process');
+const glob = require('glob');
 
 module.exports = async function(url) {
     const regex = /pixiv.net\/?\w*\/(\w*)\/(\d*)/;
@@ -21,9 +22,9 @@ module.exports = async function(url) {
     
     //Store images
     const images = [];
-    for(let i = 0; i < data.Pages; i++) {
-        images.push(`${process.env.BASE_URL}/api/scrape/pixiv/${id}_p${i}.png`);
-    }
+    glob(`${process.env.BASE_URL}/api/scrape/pixiv/${id}_*.*`, options, function (er, files) {
+        images.push(...files);
+    });
 
     return {
         id:             id,
