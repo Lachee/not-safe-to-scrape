@@ -12,7 +12,7 @@ module.exports = async function(url) {
 
     //Process the file
     const downloadsh = process.env.PIXIV2UTIL_DIR + "/download.sh";
-    child_process.execFileSync(downloadsh, [ id ]);
+    child_process.execFileSync(downloadsh, [ id ], { cwd: process.env.PIXIV2UTIL_DIR });
 
     //Fetch the file
     const filename = process.env.PIXIV2UTIL_DIR + `/dmp/${id}.json`;
