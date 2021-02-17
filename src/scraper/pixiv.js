@@ -1,45 +1,40 @@
-const PixivApi = require('pixiv-api-client');
+const fetch = require('node-fetch');
 
 //example: https://www.pixiv.net/en/artworks/86149949
 
 module.exports = async function(url) {
-    const pixiv = new PixivApi();
 
     const regex = /pixiv.net\/?\w*\/(\w*)\/(\d*)/;
     const matches = url.match(regex);
     const urlType = matches[1];
     const id = matches[2];
 
-    try {
-        //await pixiv.login();
-        await pixiv.refreshAccessToken(process.env.PIXIV_REFRESH_TOKEN);
-    } catch(error) {
-        console.error(error);
-        return [];
+    const response = await fetch(`https://www.pixiv.net/ajax/illust/${id}`, {});
+    const data =  await response.json();
+    if (data.error) {
+        console.error('Failed ', data.message);
+        return null;
     }
 
-    const details = await pixiv.illustDetail(id);
-    const tags = details.illust.tags.map(t => (t.translated_name || t.name).toLowerCase());
+    const tags = data.body.tags.tags.map(t => t.tag);
+    const pages = data.body.pageCount;
 
-    let type = 'artwork';
-    if (urlType != 'artworks' || tags.indexOf('comic') >= 0 || tags.indexOf('manga') >= 0)
-        type = 'comic';
-
-    let images = details.illust.meta_pages.map(p => p.image_urls.original);
-    if (details.illust.meta_pages.length == 0) 
-        images = [ details.illust.meta_single_page.original_image_url ];
-        
+    let images = [];
+    for(let i = 0; i < pages; i++) {
+        const imageUrl = data.body.urls.original.replace("_p0", `_p${i}`);
+        images.push(imageUrl);
+    }
 
     return {
         id:             id,
-        type:           type,
-        title:          details.illust.title,
-        description:    details.illust.caption,
-        artist:         [details.illust.user.account],
-        tags:           [... new Set(tags)],
+        type:           "artwork",
+        title:          data.body.title,
+        description:    data.body.description,
+        artist:         [ data.body.userName ],
+        tags:           [ ...new Set(tags) ],
         url:            url,
         images:         images,
-        cover:          details.illust.image_urls.medium,
+        cover:          null,
         special_access: 'referer'
-    }
+    };
 }
