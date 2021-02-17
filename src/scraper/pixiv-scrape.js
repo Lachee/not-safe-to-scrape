@@ -22,7 +22,7 @@ module.exports = async function(url) {
     
     //Store images
     const images = [];
-    glob(`${process.env.BASE_URL}/dmp/${id}_*.*`, options, function (er, files) {
+    glob(`${process.env.PIXIV2UTIL_DIR}/dmp/${id}_*.*`, options, function (er, files) {
         console.log('files', er, files);
         for(let k in files) {
             const filename = files[k];
