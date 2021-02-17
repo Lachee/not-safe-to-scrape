@@ -18,8 +18,14 @@ module.exports = function(options) {
     });
 
      //Get the reason a user is on the blacklist
-     this.router.get('/available', auth, async (req, res, next) => {
+    this.router.get('/available', auth, async (req, res, next) => {
         res.send(Object.keys(Scraper.getScrapers()));
+    });
+
+    //Returns the image back
+    this.router.get('/pixiv/:id', auth, async (req, res, next) => {
+        const filepath = process.env.PIXIV2UTIL_DIR + "/dmp/" + req.params.id;
+        res.sendFile(filepath);
     });
 
     //Just reutrn the router
