@@ -22,16 +22,20 @@ module.exports = async function(url) {
     
     //Store images
     let images = [];
-    glob(`${process.env.PIXIV2UTIL_DIR}/dmp/${id}_*.*`, options, function (er, files) {
-        console.log('files', er, files);
-        for(let k in files) {
-            const filename = files[k];
-            const pos = filename.lastIndexOf('/');
-            const name = filename.substr(pos + 1);
-            const url = `${process.env.BASE_URL}/api/scrape/pixiv/${name}`;
-            console.log(filename, name, url);
-            images.push(url);
-        }
+    await new Promise((resolve, reject) => {
+        glob(`${process.env.PIXIV2UTIL_DIR}/dmp/${id}_*.*`, options, function (er, files) {
+            console.log('files', er, files);
+            for(let k in files) {
+                const filename = files[k];
+                const pos = filename.lastIndexOf('/');
+                const name = filename.substr(pos + 1);
+                const url = `${process.env.BASE_URL}/api/scrape/pixiv/${name}`;
+                console.log(filename, name, url);
+                images.push(url);
+            }
+
+            resolve();
+        });
     });
 
     console.log('done', images);
