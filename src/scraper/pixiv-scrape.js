@@ -34,7 +34,7 @@ module.exports = async function(url) {
         tags:           data.Tags,
         url:            url,
         images:         images,
-        cover:          details.illust.image_urls.medium,
+        cover:          null,
         special_access: 'referer'
     }
 }
