@@ -10,10 +10,17 @@ module.exports = async function(url) {
     const urlType = matches[1];
     const id = matches[2];
 
-    await pixiv.login(process.env.PIXIV_NAME, process.env.PIXIV_PASSWORD);
+    try {
+        //await pixiv.login();
+        await pixiv.refreshAccessToken(process.env.PIXIV_REFRESH_TOKEN);
+    } catch(error) {
+        console.error(error);
+        return [];
+    }
+
     const details = await pixiv.illustDetail(id);
     const tags = details.illust.tags.map(t => (t.translated_name || t.name).toLowerCase());
-    
+
     let type = 'artwork';
     if (urlType != 'artworks' || tags.indexOf('comic') >= 0 || tags.indexOf('manga') >= 0)
         type = 'comic';
@@ -22,7 +29,6 @@ module.exports = async function(url) {
     if (details.illust.meta_pages.length == 0) 
         images = [ details.illust.meta_single_page.original_image_url ];
         
-    console.log(tags);
 
     return {
         id:             id,

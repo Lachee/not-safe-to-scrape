@@ -6,7 +6,7 @@ const md5       = require('md5');
 module.exports = async function(url) {
     const regex = /(\w*).discordapp.\w*\/attachments\/(\w*)\/(\w*)\/(.*)\.((png)|(jpe?g))/;
     const matches = url.match(regex);
-    console.log(matches);
+    console.log('matches', url, matches);
     let title   = matches[4];
     let id      = md5(matches[2] + matches[3] + matches[4]);
     let hotlink = `https://cdn.discordapp.com/attachments/${matches[2]}/${matches[3]}/${matches[4]}.${matches[5]}`;
