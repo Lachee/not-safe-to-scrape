@@ -22,9 +22,15 @@ module.exports = async function(url) {
     
     //Store images
     const images = [];
-    glob(`${process.env.BASE_URL}/api/scrape/pixiv/${id}_*.*`, options, function (er, files) {
-        console.log('files', files);
-        images.push(...files);
+    glob(`${process.env.BASE_URL}/dmp/${id}_*.*`, options, function (er, files) {
+        console.log('files', er, files);
+        for(let k in files) {
+            const filename = files[k];
+            const pos = filename.lastIndexOf('/');
+            const name = filename.substr(pos + 1);
+            console.log(filename, name);
+            images.push(`${process.env.BASE_URL}/api/scrape/pixiv/${name}`);
+        }
     });
 
     return {
