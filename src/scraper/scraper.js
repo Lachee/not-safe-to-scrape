@@ -4,12 +4,13 @@ module.exports = class Scraper {
     static getScrapers() {
         return {
             discord:    { rule: /discordapp.*((png)|(jpe?g))/,      file: "./discord.js"    },
+            boundhub:   { rule: /boundhub/,                         file: "./boundhub"      },
             nhentai:    { rule: /nhentai/,                          file: "./nhentai.net"   },
             danbooru:   { rule: /danbooru/,                         file: "./danbooru"      },
             safebooru:  { rule: /safebooru/,                        file: "./safebooru"     },
             gelbooru:   { rule: /gelbooru/,                         file: "./safebooru"     },
             xyz:        { rule: /xyzcomics/,                        file: "./xyz"           },
-            pixiv:      { rule: /pixiv/,                            file: "./pixiv"  },
+            pixiv:      { rule: /pixiv/,                            file: "./pixiv"         },
             twitter:    { rule: /(tw)|nitter/,                      file: "./twitter"       },
             reddit:     { rule: /reddit/,                           file: "./reddit"        },
             deviantart: { rule: /deviantart/,                       file: "./deviant"       },
