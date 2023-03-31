@@ -3,7 +3,7 @@ module.exports = function(options) {
     return (req, res, next) => {
         if (options.key != '') { 
             //Get the auth header
-            const authHeader = req.headers.authorization;
+            const authHeader = req.headers.authorization || req.query.auth_key;
             if (!authHeader) 
                 throw new ForbiddenError('forbidden');
 
