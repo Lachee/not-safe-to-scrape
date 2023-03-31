@@ -8,6 +8,7 @@ NSTS is a web scraper that specializes in NSFW content. It is able to scrape tit
 * Pixiv
 * Rule34
 * SVSComics
+* BoundHub
 * _everything else!*_
 
 **Generic Support**
@@ -28,7 +29,8 @@ The scraper does not download any content, it will just return hot links to the 
 |languages	| ?string[]	| list of languages that the comic is in. Optional. |
 |url		| string 	| original URL of the website. |
 |images		| string[] 	| list of image URLs to the best quality available of the image. |
-|thumbnail| string | the first image URL, or a suitable thumbnail to display |
+|videos     | ?string[] | list of videos from the website. |
+|cover      | string    | the first image URL, or a suitable thumbnail to display |
 |pages      | ?int      | number of pages in the comic
 |special_access| ?string | indicates that the images are stuck behind either authorization or referer. Either way, you require special access to get to the image. |
 
